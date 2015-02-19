@@ -32,7 +32,7 @@
 	function GameBoard(horiz, vert) { //GameBoard Class
 		this.cellarray = [];
 		//create a new cell and add it to the array
-		for(var i = 0; i < horiz; i++) {
+		for(var i = 0; i < vert; i++) {
 			for(var j = 0; j < horiz; j++) {
 				if((i+j)%2==0) 
 					var life = 0;
@@ -40,6 +40,7 @@
 				var current = new Cell(j*50,i*50,life, horiz, vert);
 				this.cellarray.push(current);
 			}
+			console.dir(this.cellarray);
 		}
 
 		this.findneighbors = function(x,y) {
@@ -167,11 +168,11 @@
 		clearInterval(go);
 	};
 	document.getElementById("resume").onclick = function() {
-		go = setInterval(update,4000,cells);
+		go = setInterval(update,1000,cells);
 	};
 	$(document).on('click', 'rect',function(e){ //clicked on a rectangle
 		//get ID of rectangle
-		var cellid = ""+Math.floor(e.pageX /54)*50+Math.floor((e.pageY -130)/50)*50;
+		var cellid = ""+Math.floor(e.pageX /50.5)*50+Math.floor((e.pageY -130)/50)*50;
 		//send to a function that toggles the life
 		cells.togglelife(cellid);
 		//updates the grid
